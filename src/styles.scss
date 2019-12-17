@@ -1,0 +1,87 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Padding */
+.p-1 {
+  padding: 10px;
+}
+
+.p-2 {
+  padding: 20px;
+}
+
+.p-3 {
+  padding: 30px;
+}
+
+.py-1 {
+  padding: 10px 0 !important;
+}
+
+.px-4 {
+  padding: 0 40px !important;
+}
+
+.px-1 {
+  padding: 0 10px !important;
+}
+
+.pt-1 {
+  padding-top: 10px;
+}
+
+.pb-1 {
+  padding-bottom: 10px;
+}
+
+/* Margin */
+.m-1 {
+  padding: 10px;
+}
+
+.m-2 {
+  padding: 20px;
+}
+
+.m-3 {
+  padding: 30px;
+}
+
+.my-1 {
+  margin: 10px 0 !important;
+}
+
+.mx-1 {
+  margin: 0 10px !important;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+/* Flex */
+.d-flex {
+  display: flex !important;
+}
+
+.ai-center {
+  align-items: center !important;
+}
+
+.jc-center {
+  justify-content: center !important;
+}
+
+

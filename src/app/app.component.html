@@ -1,0 +1,8 @@
+
+<main class="body-padding">
+  <router-outlet></router-outlet>
+</main>
+
+<div class="loading-shade d-flex jc-center ai-center" *ngIf="spinner | async">
+  <mat-spinner></mat-spinner>
+</div>

@@ -1,0 +1,88 @@
+<section>
+  <mat-card>
+    <mat-card-header class="d-flex ai-center">
+      <mat-card-title class="m-0">Contact Lists</mat-card-title>
+      <button [routerLink]="['/contacts/create']" class="ml-auto"
+              mat-icon-button
+              routerLinkActive="active">
+        <mat-icon matTooltip="Add new contact" matTooltipPosition="above">
+          add_circle_outline
+        </mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content class="p-1">
+      <mat-form-field>
+        <input #filterInput (keyup)="keyUp.next($event)" matInput placeholder="Filter" type="search">
+        <button (click)="filterInput.value=''; applyFilter('')" *ngIf="filterInput.value"
+                mat-button mat-icon-button matSuffix>
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table [dataSource]="dataSource" mat-table>
+          <!-- Name Column -->
+          <ng-container matColumnDef="firstName">
+            <th *matHeaderCellDef mat-header-cell> Name</th>
+            <td *matCellDef="let row" mat-cell> {{row.firstName}} {{row.lastName}}</td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th *matHeaderCellDef mat-header-cell> Email</th>
+            <td *matCellDef="let row" mat-cell> {{row.email}} </td>
+          </ng-container>
+
+          <!-- Phone Number Column -->
+          <ng-container matColumnDef="phoneNumber">
+            <th *matHeaderCellDef mat-header-cell> Phone Number</th>
+            <td *matCellDef="let row" mat-cell> {{row.phoneNumber}} </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th *matHeaderCellDef mat-header-cell> Status</th>
+            <td *matCellDef="let row" [style.color]="row.status?'green':'red'" mat-cell>
+              {{row.status ? 'Active' : 'Inactive'}}
+            </td>
+          </ng-container>
+
+          <!-- Action Menu Column -->
+          <ng-container matColumnDef="more">
+            <th *matHeaderCellDef mat-header-cell></th>
+            <td *matCellDef="let row" mat-cell>
+              <ng-container
+                [ngTemplateOutletContext]="{$implicit: row}"
+                [ngTemplateOutlet]="moreMenuTempRef"></ng-container>
+            </td>
+          </ng-container>
+
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<ng-template #moreMenuTempRef let-contact>
+  <button mat-icon-button [matMenuTriggerFor]="menuOptions">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menuOptions="matMenu">
+    <button mat-menu-item (click)="editContact(contact)">
+      <mat-icon>edit</mat-icon>
+      <span>Edit</span>
+    </button>
+    <button mat-menu-item (click)="deleteContact(contact.id)">
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+    <button mat-menu-item (click)="changeContactStatus(contact)">
+      <mat-icon>{{contact.status ? 'airplanemode_inactive' : 'airplanemode_active'}}</mat-icon>
+      <span>{{contact.status ? 'Inactivate' : 'Activate'}}</span>
+    </button>
+  </mat-menu>
+</ng-template>
