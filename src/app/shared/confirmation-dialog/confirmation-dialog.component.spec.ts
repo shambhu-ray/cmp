@@ -1,6 +1,9 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ConfirmationDialogComponent} from './confirmation-dialog.component';
+import {MaterialModules} from '../shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 describe('ConfirmationDialogComponent', () => {
   let component: ConfirmationDialogComponent;
@@ -8,9 +11,20 @@ describe('ConfirmationDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmationDialogComponent ]
+      declarations: [ConfirmationDialogComponent],
+      imports: [
+        BrowserAnimationsModule,
+        MaterialModules
+      ],
+      providers: [
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {title: 'Confirmation', message: 'Test message'}
+        }
+      ]
+
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

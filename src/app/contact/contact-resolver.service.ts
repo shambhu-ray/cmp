@@ -15,7 +15,7 @@ export class ContactResolverService implements Resolve<ContactDto[]> {
     return this._contactApiService.getContacts()
       .pipe(
         map(resp => resp.length > 0 ? resp : null),
-        tap(resp => !resp ? this.navigate() : null)
+        tap(resp => !resp ? this.navigate() : null, err => this.navigate())
       );
   }
 

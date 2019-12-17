@@ -19,7 +19,7 @@ export class ContactsComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['firstName', 'email', 'phoneNumber', 'status', 'more'];
   dataSource: MatTableDataSource<ContactDto> = new MatTableDataSource<ContactDto>();
-  contactDtos: ContactDto[];
+  contactDtos: ContactDto[] = [];
   keyUp = new Subject<string>();
 
   constructor(
@@ -50,7 +50,7 @@ export class ContactsComponent implements OnInit, AfterViewInit {
    * @param data
    */
   editContact(data: ContactDto) {
-    this._router.navigate(['/contacts/edit'], {state: {data: data}});
+    this._router.navigate(['/contacts/edit'], {queryParams: {data: JSON.stringify(data)}});
   }
 
   /**
@@ -59,13 +59,18 @@ export class ContactsComponent implements OnInit, AfterViewInit {
    */
   async deleteContact(id: number) {
     const result = await this._confirmationDialogService.openDialog({
-      title: 'Confirm',
+      title: 'Delete Contact',
       message: 'This item will be deleted. Are you sure want to continue?'
     }).afterClosed().toPromise();
     if (result) {
-      this._contactApiService.deleteContact(id).subscribe(() => {
-        this.updateDataSource(id);
-      });
+      this._contactApiService.deleteContact(id)
+        .subscribe(() => {
+          if (this.contactDtos.length <= 1) {
+            this._router.navigate(['/contacts/create']);
+            return;
+          }
+          this.updateDataSource(id);
+        });
     }
   }
 

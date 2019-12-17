@@ -8,13 +8,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 * (Optional) Manage you `Node.js` version using [NVM (Node Version Manager)](https://github.com/coreybutler/nvm-windows) 
 * Make sure the latest version of the Angular CLI is installed. Update with `npm install -g @angular/cli` [more information](https://angular.io/cli)
 
-### Install project dependency
-Install `package.json` dependency using `npm install` command under the project folder.
-
 ### Back-End (JSON Server)
 * Clone the backend project from [here](https://github.com/shambhu-ray/json-server)
 * Install `package.json` dependency using `npm install` command under the project folder.
-* Run the backend server using `npm start` command, under the project directory.
+* Start JSON server using `npm start` command, under the project directory.
+
+### Install project dependency
+Install `package.json` dependency using `npm install` command under the project folder.
 
 
 ### Development server

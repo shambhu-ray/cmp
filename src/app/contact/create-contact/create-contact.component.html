@@ -10,7 +10,7 @@
         <input formControlName="firstName" matInput placeholder="Enter your first name" required type="text">
         <mat-error
           *ngIf="fControl.firstName.invalid && (fControl.firstName.dirty || fControl.firstName.touched)">
-          <app-error-message [controlName]="fControl.firstName"></app-error-message>
+          <app-error-message [formController]="fControl.firstName"></app-error-message>
         </mat-error>
       </mat-form-field>
 
@@ -19,7 +19,7 @@
         <input formControlName="lastName" matInput placeholder="Enter your last name" type="text">
         <mat-error
           *ngIf="fControl.lastName.invalid && (fControl.lastName.dirty || fControl.lastName.touched)">
-          <app-error-message [controlName]="fControl.lastName"></app-error-message>
+          <app-error-message [formController]="fControl.lastName"></app-error-message>
         </mat-error>
       </mat-form-field>
 
@@ -27,18 +27,18 @@
         <mat-label>Email</mat-label>
         <input formControlName="email" matInput placeholder="Enter your email" required type="email">
         <mat-error *ngIf="fControl.email.invalid && (fControl.email.dirty || fControl.email.touched)">
-          <app-error-message [controlName]="fControl.email"></app-error-message>
+          <app-error-message [formController]="fControl.email"></app-error-message>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="form-field-block pb-1">
         <mat-label>Phone Number</mat-label>
-        <input #phoneNumber formControlName="phoneNumber" matInput placeholder="Enter your phone number" required
+        <input formControlName="phoneNumber" matInput placeholder="Enter your phone number" required
                type="tel">
-        <mat-hint align="end">{{phoneNumber.value?.length || 0}}/10</mat-hint>
+        <mat-hint align="end">{{fControl.phoneNumber.value?.length || 0}}/10</mat-hint>
         <mat-error
           *ngIf="fControl.phoneNumber.invalid && (fControl.phoneNumber.dirty || fControl.phoneNumber.touched)">
-          <app-error-message [controlName]="fControl.phoneNumber"></app-error-message>
+          <app-error-message [formController]="fControl.phoneNumber"></app-error-message>
         </mat-error>
       </mat-form-field>
 

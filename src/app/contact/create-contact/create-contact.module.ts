@@ -5,6 +5,7 @@ import {CreateContactComponent} from './create-contact.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../../shared/shared.module';
 import {ConfirmationDialogModule} from '../../shared/confirmation-dialog/confirmation-dialog.module';
+import {AccessGuard} from './access.guard';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'edit',
-    component: CreateContactComponent
+    component: CreateContactComponent,
+    canActivate: [AccessGuard]
   },
   {
     path: '',

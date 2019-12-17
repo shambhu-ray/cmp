@@ -12,7 +12,7 @@ export class ErrorMessageComponent {
   message = '';
 
   @Input()
-  set controlName(control: AbstractControl) {
+  set formController(control: AbstractControl) {
     this.errors = control.errors;
     this.getErrors(control);
   }

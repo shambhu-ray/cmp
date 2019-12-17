@@ -3,7 +3,8 @@ import {AbstractControl, FormControl, FormGroup, FormGroupDirective, Validators}
 import {nameValidator, phoneNumberValidator} from './form-validator.validators';
 import {ContactApiService} from '../contact-api.service';
 import {ContactDto} from '../../models/contact.interface';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-contact',
@@ -19,7 +20,8 @@ export class CreateContactComponent implements OnInit {
 
   constructor(
     private _contactApiService: ContactApiService,
-    private _router: Router
+    private _router: Router,
+    private _route: ActivatedRoute
   ) {
     this.initializeFormGroup();
   }
@@ -32,11 +34,19 @@ export class CreateContactComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contactDto = history.state.data;
-    if (this.contactDto) {
-      this.isNew = false;
-      this.contactFormGroup.patchValue(this.contactDto);
-    }
+    this._route.queryParams
+      .pipe(
+        filter(params => params.data),
+        map(param => JSON.parse(param.data))
+      )
+      .subscribe(resp => {
+        this.contactDto = resp;
+        if (this.contactDto) {
+          this.isNew = false;
+          this.contactFormGroup.patchValue(this.contactDto);
+        }
+      });
+    /* */
   }
 
   /**
@@ -72,8 +82,8 @@ export class CreateContactComponent implements OnInit {
    */
   createContact(data: ContactDto) {
     this._contactApiService.createContact(data)
-      .subscribe(resp => {
-        console.log(resp);
+      .subscribe(() => {
+        this._router.navigate(['/']);
       });
   }
 
